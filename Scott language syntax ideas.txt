@@ -1,0 +1,38 @@
+Operators:
++ addition
+- subtration
+* multiplication
+/ division
+< less than
+> greater than
+<= less than or equal to
+>= greater than or equal to
+% modulo
+= assignment
+== equal to
+! not
+!= not equal to
+and for and in conditional Functions
+or for or in conditional Functions
+not for not in conditional Functions
+
+Variables:
+int intName = some interger value;
+float floatName = some floating point value;
+string stringName = "some string value";
+bool booleanName = true or false boolean value;
+
+Functions:
+fun functionName():{
+    code code code
+};
+
+Commands:
+print(data to print to terminal);
+
+if(condition):{
+    do this code
+};
+
+Commenting:
+?This is a Comment?
