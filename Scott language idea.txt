@@ -2,14 +2,18 @@ The Scott Programming Language will have the .sl extention
 
 Written In Python
 
+Trello Board Link: https://trello.com/b/xOxsKugF/scott-programming-language
+
 The whole project is uploaded to GitHub as it is made
 
 To run it you will start up the language in cmd and it will prompt you where is your code
 Then it will compile the code
 
-Compilier Steps:
+Parsing Steps:
 Remove all line breaks and put all code in a single line
 Parse The code and identify commands
+
+Compilier Steps:
 Compile the instructions 
 Return data back to cmd console
 
@@ -20,6 +24,7 @@ Functions
 if statements
 console printing
 Documentation
+Line breaks(such as ;)
 
 It should have: 
 constants
