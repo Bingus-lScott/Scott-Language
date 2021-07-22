@@ -1,0 +1,36 @@
+The Scott Programming Language will have the .sl extention
+
+Written In Python
+
+The whole project is uploaded to GitHub as it is made
+
+To run it you will start up the language in cmd and it will prompt you where is your code
+Then it will compile the code
+
+Compilier Steps:
+Remove all line breaks and put all code in a single line
+Parse The code and identify commands
+Compile the instructions 
+Return data back to cmd console
+
+It will contain:
+Basic operators
+Variables 
+Functions 
+if statements
+console printing
+Documentation
+
+It should have: 
+constants
+return
+
+It could have:
+while statements
+
+
+
+The Documentation will be basic only showing the commands and how they are used
+
+
+
