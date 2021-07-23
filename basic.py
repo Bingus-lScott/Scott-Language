@@ -9,7 +9,7 @@ DIGITS = '0123456789'
 #####################
 
 class Error:
-    # Creates an Error Template
+    # Creates Error Template
     def __init__(self, pos_start, pos_end, error_name, details):
         self.pos_start = pos_start
         self.pos_end = pos_end
@@ -17,54 +17,51 @@ class Error:
         self.details = details
     
     def as_string(self):
-        result = f'{self.error_name}: {self.details}'
+        result  = f'{self.error_name}: {self.details}\n'
         result += f'File {self.pos_start.fn}, line {self.pos_start.ln + 1}'
         return result
 
 class IllegalCharError(Error):
     def __init__(self, pos_start, pos_end, details):
-        super().__init__(pos_start, pos_end, 'Illegal Charater', details)
+        super().__init__(pos_start, pos_end, 'Illegal Character', details)
 
 #####################
 # POSITION
 #####################
 
 class Position:
-    def __init__(self, indx, ln, col, fn, ftxt):
-        self.indx = indx
+    def __init__(self, idx, ln, col, fn, ftxt):
+        self.idx = idx
         self.ln = ln
         self.col = col
         self.fn = fn
         self.ftxt = ftxt
 
     def advance(self, current_char):
-        self.indx += 1
+        self.idx += 1
         self.col += 1
-        
-        if current_char == "\n":
+
+        if current_char == '\n':
             self.ln += 1
             self.col = 0
 
         return self
 
     def copy(self):
-        return Position(self.index, self.ln, self.col, self.fn, self.ftxt)
-
-
+        return Position(self.idx, self.ln, self.col, self.fn, self.ftxt)
 
 #####################
 # TOKENS
 #####################
 
-# TT stands for Token Type
-TT_INT = 'TT_INT'
-TT_FLOAT = 'FLOAT'
-TT_PLUS = 'PLUS'
-TT_MINUS = 'MINUS'
-TT_MUL = 'MUL'
-TT_DIV = 'DIV'
-TT_LPAREN = 'LPAREN'
-TT_RPAREN = 'RPAREN'
+TT_INT		= 'INT'
+TT_FLOAT    = 'FLOAT'
+TT_PLUS     = 'PLUS'
+TT_MINUS    = 'MINUS'
+TT_MUL      = 'MUL'
+TT_DIV      = 'DIV'
+TT_LPAREN   = 'LPAREN'
+TT_RPAREN   = 'RPAREN'
 
 class Token:
     # Creates a Token Template
@@ -73,7 +70,7 @@ class Token:
         self.value = value
     # a special method used to represent a class's objects as a string
     def __repr__(self):
-        # The f'' just means its a literal string
+        # The f makes the string a literal string
         if self.value: return f'{self.type}:{self.value}'
         return f'{self.type}'
 
@@ -88,11 +85,11 @@ class Lexer:
         self.pos = Position(-1, 0, -1, fn, text)
         self.current_char = None
         self.advance()
-
+    
     def advance(self):
         self.pos.advance(self.current_char)
-        self.current_char = self.text[self.pos.indx] if self.pos.indx < len(self.text) else None
-    
+        self.current_char = self.text[self.pos.idx] if self.pos.idx < len(self.text) else None
+
     def make_tokens(self):
         tokens = []
 
@@ -126,7 +123,7 @@ class Lexer:
                 return [], IllegalCharError(pos_start, self.pos, "'" + char + "'")
 
         return tokens, None
-    
+
     def make_number(self):
         num_str = ''
         dot_count = 0
@@ -137,14 +134,13 @@ class Lexer:
                 if dot_count == 1: break
                 dot_count += 1
                 num_str += '.'
-        else:
-            num_str += self.current_char
-        self.advance()
+            else:
+                num_str += self.current_char
+            self.advance()
 
-        # Returns Token Type
         if dot_count == 0:
-            return Token(TT_INT)
-        else: 
+            return Token(TT_INT, int(num_str))
+        else:
             return Token(TT_FLOAT, float(num_str))
 
 #####################
