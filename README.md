@@ -7,10 +7,10 @@ Written in python 3.9.3
 
 To use this language:
 ~~1) Write the code in any text editor~~
-~~2) Execute the basic.py file in CMD or Terminal~~
+~~2) Execute the shell.py file in CMD or Terminal~~
 ~~3) Enter in the file path AND File into the input field~~
 
-Currently the only way to use the language is to type equations into the terminal. Simply Execute Basic.py and type your equation in and you will get an answer. Errors will also be printed to console.
+Currently the only way to use the language is to type equations into the terminal. Simply Execute shell.py and type your equation in and you will get an answer. Errors will also be printed to console.
 
 
 ~~After this you code should be compilled and written to the console. (There also may be a file named~~
