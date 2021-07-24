@@ -1,9 +1,9 @@
 # Scott-Language
-YOU MAY USE ANY CODE in this project WITH CREDIT and you are FREE TO CHANGE IT. 
-* Heavily borrowed from CodePulse's How to make a Programming Language Series
+* Python 3.9.3
 
-Written in python 3.9.3
+* YOU MAY USE ANY CODE in this project WITH CREDIT and you are FREE TO CHANGE IT. 
 
+* A Good chunk of code is borrowed from CodePulse's How to make a Programming Language Series
 
 To use this language:
 ~~1) Write the code in any text editor~~
