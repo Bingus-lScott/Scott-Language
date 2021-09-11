@@ -9,7 +9,7 @@ To use this language:
 3) Enter in the file path AND File into the input field
 
 After this you code should be compilled and written to the console. There will also be a file named
-SLOUTDATA.txt in the same directory as your code if I choose to impliment this
+SLOUTDATA.txt in the installiation directory
 
 
 
