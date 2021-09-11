@@ -1,6 +1,5 @@
 # Module Provided by CodePulse
 
-
 def string_with_arrows(text, pos_start, pos_end):
     result = ''
 
