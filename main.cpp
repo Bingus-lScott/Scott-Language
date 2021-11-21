@@ -1,0 +1,123 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <map>
+#include <vector>
+using namespace std;
+
+int main(){
+    map<int, pair<string, string>> tokens{};
+
+    // File Buisness
+
+    cout << "Enter full file path here: ";
+    string fPath;
+    cin >> fPath; 
+
+    vector<string> textLines;
+    string line;
+    vector<string> words{};
+
+    ifstream inFile;
+    inFile.open("lang.sl");
+    
+    if(inFile.fail()){
+        cerr << "Error Opening File" << endl;
+        exit(1);
+    }
+
+    // The lexing will be done in here -----------------------------------------------------------------------------------------------------------------------
+
+    // Adds all lines in text file to vector
+    while(getline(inFile, line))
+    {
+        // store each line as vector element
+        textLines.push_back(line);
+    }
+
+    // Sorts lines in vector into individual words
+    for(int i = 0; i < textLines.size(); i++)
+    {
+      //  std::cout<<textLines[i]<< " " << "|";
+
+        string text = textLines[i];
+        string delim = " ";
+
+        size_t pos = 0;
+        while ((pos = text.find(delim)) != string::npos) {
+            words.push_back(text.substr(0, pos));
+            text.erase(0, pos + delim.length());
+        }
+        if (!text.empty())
+            words.push_back(text.substr(0, pos));
+      //  for (const auto &str : words) {
+      //      cout << str << endl;
+      //  }
+    }
+
+    // Creates tokens from words
+    int tempspot;
+    for(int j = 0; j < words.size(); j++){
+
+        // String Find
+        if(words.at(j) == "string"){
+            // Set string and string name
+            tempspot = j;
+            j++;
+            if(words.at(j) != "\""){
+                tokens[tempspot] = make_pair(words[tempspot], words[j]);
+            }
+
+            // String data assignment
+            tempspot = j;
+            j++;
+            size_t found = words.at(tempspot).find("\"");
+            if(found){
+                tokens[j] = make_pair(words[tempspot], words[j]);
+            } 
+        }
+
+        // Int Find
+        else if(words.at(j) == "int"){
+            // Set int and int name
+            tempspot = j;
+            j++;
+            if(words.at(j) != "09"){
+                tokens[tempspot] = make_pair(words[tempspot], words[j]);
+            }
+
+            // Int data assignment
+            tempspot = j;
+            j++;
+            size_t found = words.at(tempspot).find("09");
+            if(found){
+                tokens[j] = make_pair(words[tempspot], words[j]);
+            }
+        }
+    
+        // Print Find
+        else if(words.at(j) == "Print"){
+            // Set Print and Print data
+            tempspot = j;
+            j++;
+            if(words.at(j) != "09azAZ"){
+                tokens[tempspot] = make_pair(words[tempspot], words[j]);
+            }
+
+        }
+
+        // Nothing Found
+        else{
+            cout << "Error" << endl; 
+        }
+    }
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    // Prints out lexed code
+    for(auto it = tokens.cbegin(); it != tokens.cend(); ++it)
+    {
+        cout <<it->second.first << " " << it->second.second << "\n";
+    }
+    
+    return 0;
+}
