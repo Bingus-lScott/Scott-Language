@@ -11,15 +11,15 @@ int main(){
     // File Buisness
 
     cout << "Enter full file path here: ";
-    string fPath;
-    cin >> fPath; 
+    char fPath[100];
+    cin.getline(fPath, sizeof(fPath)); 
 
     vector<string> textLines;
     string line;
     vector<string> words{};
 
     ifstream inFile;
-    inFile.open("lang.sl");
+    inFile.open(fPath);
     
     if(inFile.fail()){
         cerr << "Error Opening File" << endl;
