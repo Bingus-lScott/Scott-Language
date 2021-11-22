@@ -3,6 +3,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include <bits/stdc++.h>
 using namespace std;
 
 int main(){
@@ -38,7 +39,7 @@ int main(){
     // Sorts lines in vector into individual words
     for(int i = 0; i < textLines.size(); i++)
     {
-      //  std::cout<<textLines[i]<< " " << "|";
+        //std::cout<<textLines[i]<< " " << "|";
 
         string text = textLines[i];
         string delim = " ";
@@ -111,13 +112,67 @@ int main(){
             cout << "Error" << endl; 
         }
     }
-// ----------------------------------------------------------------------------------------------------------------------------------------------------------
-
+/*
     // Prints out lexed code
     for(auto it = tokens.cbegin(); it != tokens.cend(); ++it)
     {
-        cout <<it->second.first << " " << it->second.second << "\n";
+        cout << it -> second.first << " " << it -> second.second << std::endl;
     }
+*/
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------
+
     
-    return 0;
+// Transpiler -----------------------------------------------------------------------------------------------------------------------------------------------
+    vector<string> code;
+    
+    ofstream outFile;
+    
+    for(auto it = tokens.cbegin(); it != tokens.cend(); ++it){
+        // Int interpreting
+       if(it -> second.first == "int"){
+            code.push_back("int");
+            code.push_back(it -> second.second);
+            code.push_back(";");
+            ++it;
+            code.push_back(it -> second.first);
+            code.push_back("=");
+            code.push_back(it -> second.second);
+            code.push_back(";");
+        } 
+        // String interpreting
+        else if(it -> second.first == "string"){
+            code.push_back("string");
+            code.push_back(it -> second.second);
+            code.push_back(";");
+            ++it;
+            code.push_back(it -> second.first);
+            code.push_back("=");
+            code.push_back(it -> second.second);
+            code.push_back(";");
+        }
+        // Print interpreting
+        else if(it -> second.first == "Print"){
+            code.push_back("cout");
+            code.push_back("<<");
+            code.push_back(it -> second.second);
+            code.push_back(";");
+        }
+    }
+
+    outFile.open("temp.cpp");
+
+    outFile << "#include <iostream>\n#include <string>\nusing namespace std;\nint main(){"; 
+
+    for(int p = 0; p < code.size(); p++){
+        outFile << " " << code.at(p) << " ";
+    }
+
+    outFile << "return 0;}";
+    outFile.close();
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------
+    // Compile and Run Code
+    system("g++ temp.cpp -o temp.exe");
+    system("temp.exe");
+
+    return EXIT_SUCCESS;
 }
